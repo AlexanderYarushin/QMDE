@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/wallpaper.jpg</file>
+        <file>fonts/Inter-Regular-slnt=0.ttf</file>
+
+    </qresource>
+</RCC>
