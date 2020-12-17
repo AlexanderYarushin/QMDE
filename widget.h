@@ -4,6 +4,7 @@
 #include "wincontrol.h"
 #include "panel.h"
 #include "dock.h"
+#include "program.h"
 
 #include <QWidget>
 #include <QPainter>

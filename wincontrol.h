@@ -28,8 +28,8 @@ private:
     win_list list_windows(Display* disp);
     win_list oldWin;
     win_list newWin;
-    bool is_work = false;
-
+    bool is_work = true;
+    void checking_for_ownership(ulong window);
 signals:
     void sendWindow(ulong window);
 public slots:

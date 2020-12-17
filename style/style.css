@@ -1,0 +1,12 @@
+#handler {
+    background: QLinearGradient(x1: 0.5, y1: 1,x2: 0.5, y2: 0, stop: 0 rgba(54,54,54,1), stop: 1 rgba(65,65,65,1));
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top: 1px solid #686868;
+    border-bottom: 1px solid #000;
+}
+
+#handler_btn{
+    border-radius: 6px;
+    background:#5d5d5d;
+}

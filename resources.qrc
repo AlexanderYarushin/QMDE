@@ -1,7 +1,8 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/wallpaper.jpg</file>
-        <file>fonts/Inter-Regular-slnt=0.ttf</file>
 
+        <file>images/wallpaper.jpg</file>
+        <file>fonts/HelveticaNeueCyr-Light.ttf</file>
+        <file>style/style.css</file>
     </qresource>
 </RCC>

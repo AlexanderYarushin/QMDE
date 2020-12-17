@@ -1,8 +1,15 @@
 #include "widget.h"
+#include <QCoreApplication>
+#include <QPushButton>
+
+
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
 {
+
+
+
     int screen_width = 1920;
     int screen_height = 1080;
     int app_width = 1376;
@@ -15,15 +22,29 @@ Widget::Widget(QWidget *parent)
     this->setGeometry(screen_width/2-app_width/2,screen_height/2-app_height/2,
                       app_width, app_height);
 
+    qDebug() << this->x();
+
     this->background = QImage(":/images/wallpaper.jpg");
     this->background = this->background.scaled(app_width, app_height, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
 
-    this->panel = new Panel(QRect(0,0,this->width(),25),this);
+    this->panel = new Panel(QRect(0,0,this->width(),23),this);
+
+    QPushButton *btn = new QPushButton(this);
+    connect(btn,&QPushButton::clicked,this,[this](){
+        QWidget *terminal = new QWidget(nullptr);
+        terminal->setStyleSheet("background:#1e1e1e; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;");
+        terminal->show();
+    });
+
+
+
 
     this->win_control = new WinControl(this);
     connect(this->win_control, &WinControl::sendWindow, this, &Widget::getNewWindow);
 
-    this->win_control->startFind();
+    this->win_control->start();
+
+
 
     //this->setStyleSheet("border: 1px solid #999;");
 
@@ -43,7 +64,9 @@ void Widget::paintEvent(QPaintEvent *)
 void Widget::getNewWindow(ulong window)
 {
     if(this->winId() != window){
-        qDebug() << window;
+
+        Program *prg = new Program(this);
+        prg->setWindow(QWindow::fromWinId(window));
     }
 }
 

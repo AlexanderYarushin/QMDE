@@ -5,6 +5,7 @@
 WinControl::WinControl(QObject* parent)
     : QThread(parent)
 {
+
     Display* dpy;
     if ((dpy = XOpenDisplay(NULL))) {
         oldWin = list_windows(dpy);
@@ -17,9 +18,10 @@ void WinControl::run()
     bool find = false;
 
     while (true) {
-
         if (this->is_work) {
             if ((dpy = XOpenDisplay(NULL))) {
+                QThread::msleep(300);
+
                 newWin = list_windows(dpy);
 
                 for (unsigned long i = 0; i < newWin.count; ++i) {
@@ -41,7 +43,6 @@ void WinControl::run()
         } else {
             break;
         }
-        QThread::msleep(300);
     }
 }
 
@@ -54,7 +55,6 @@ void WinControl::startFind()
 void WinControl::stopFind()
 {
     this->is_work = false;
-
 }
 
 char* WinControl::get_property(Display* disp, Window win, Atom xa_prop_type, char* prop_name, unsigned long* size)
@@ -102,7 +102,8 @@ Window* WinControl::get_client_list(Display* disp, unsigned long* size)
     Window* client_list;
 
     if ((client_list = (Window*)get_property(disp, DefaultRootWindow(disp),
-                                               XA_WINDOW, "_NET_CLIENT_LIST", size)) == NULL) {
+                                               XA_WINDOW, "_NET_CLIENT_LIST", size))
+        == NULL) {
         if ((client_list = (Window*)get_property(disp, DefaultRootWindow(disp),
                                                    XA_CARDINAL, "_WIN_CLIENT_LIST", size))
             == NULL) {
